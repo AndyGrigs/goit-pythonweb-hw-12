@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import datetime
+from app.models.users import UserRole
 
 class UserBase(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
@@ -8,10 +9,12 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str = Field(..., min_length=6, max_length=255)
+    role: Optional[UserRole] = UserRole.USER
 
 class UserResponse(UserBase):
     id: int
     avatar_url: Optional[str] = None
+    role: UserRole
     is_verified: bool
     created_at: datetime
     
@@ -34,3 +37,7 @@ class UserUpdate(BaseModel):
     
 class EmailVerification(BaseModel):
     token: str
+
+class UserRoleUpdate(BaseModel):
+    """Окрема схема для зміни ролі користувача (тільки для адмінів)"""
+    role: UserRole
