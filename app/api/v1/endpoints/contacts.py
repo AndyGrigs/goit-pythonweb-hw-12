@@ -11,6 +11,8 @@ from app.crud.contacts import (  # виправлено імпорт
     delete_contact,
     get_contacts_with_upcoming_birthdays
 )
+from app.middleware.auth import get_current_verified_user
+from app.models.users import User
 from app.schemas.contacts import ContactCreate, ContactUpdate, ContactResponse
 
 router = APIRouter()
@@ -18,11 +20,12 @@ router = APIRouter()
 @router.post("/", response_model=ContactResponse, status_code=201)
 def create_contact_endpoint(
     contact: ContactCreate, 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User= Depends(get_current_verified_user) 
 ):
     """Створити новий контакт"""
     try:
-        return create_contact(db=db, contact=contact)
+        return create_contact(db=db, contact=contact, ownwer_id=current_user.id)
     except Exception as e:
         if "unique constraint" in str(e).lower():
             raise HTTPException(status_code=400, detail="Email is already in the system")
@@ -33,42 +36,53 @@ def read_contacts(
     skip: int = Query(0, ge=0, description="Amount of queries for skipping"),
     limit: int = Query(100, ge=1, le=500, description="Max amount of records"),
     search: Optional[str] = Query(None, description="Search with a name or email"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User= Depends(get_current_verified_user) 
 ):
     """Отримати список контактів"""
-    contacts = get_contacts(db, skip=skip, limit=limit, search=search)
+    contacts = get_contacts(db, owner_id=current_user.id, skip=skip, limit=limit, search=search)
     return contacts
 
 @router.get("/birthdays/", response_model=List[ContactResponse])
-def read_upcoming_birthdays(db: Session = Depends(get_db)):
+def read_upcoming_birthdays(db: Session = Depends(get_db), current_user: User= Depends(get_current_verified_user) ):
     """Отримати контакти з днями народження на найближчі 7 днів"""
-    contacts = get_contacts_with_upcoming_birthdays(db)
+    contacts = get_contacts_with_upcoming_birthdays(db, owner_id=current_user.id)
     return contacts
 
 @router.get("/{contact_id}", response_model=ContactResponse)
-def read_contact(contact_id: int, db: Session = Depends(get_db)):
+def read_contact(contact_id: int, db: Session = Depends(get_db), current_user: User= Depends(get_current_verified_user)):
     """Отримати контакт за ID"""
-    db_contact = get_contact(db, contact_id=contact_id)
+    db_contact = get_contact(db, contact_id=contact_id, owner_id=current_user.id)
     if db_contact is None:
         raise HTTPException(status_code=404, detail="Contact not found!")
     return db_contact
 
 @router.put("/{contact_id}", response_model=ContactResponse)
 def update_contact_endpoint(
-    contact_id: int, 
+    contact_id: int,
     contact_update: ContactUpdate, 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User= Depends(get_current_verified_user)
 ):
     """Оновити контакт"""
-    db_contact = update_contact(db, contact_id=contact_id, contact_update=contact_update)
+    db_contact = update_contact(
+        db, 
+        contact_id=contact_id, 
+        contact_update=contact_update,
+        owner_id=current_user.id
+        )
     if db_contact is None:
         raise HTTPException(status_code=404, detail="Contact not found!")
     return db_contact
 
 @router.delete("/{contact_id}")
-def delete_contact_endpoint(contact_id: int, db: Session = Depends(get_db)):
+def delete_contact_endpoint(
+        contact_id: int,
+        db: Session = Depends(get_db),
+        current_user: User= Depends(get_current_verified_user)
+        ):
     """Видалити контакт"""
-    success = delete_contact(db, contact_id=contact_id)
+    success = delete_contact(db, contact_id=contact_id, owner_id=current_user.id)
     if not success:
         raise HTTPException(status_code=404, detail="Contact not found!")
     return {"message": "Contact deleted successfully!"}

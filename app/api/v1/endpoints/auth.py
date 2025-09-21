@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from app.api.deps import get_db
 from app.schemas.users import UserCreate, UserLogin, Token, UserResponse
+from app.models.users import UserRole
 from app.crud.users import (
     get_user_by_email, 
     get_user_by_username,
@@ -37,7 +38,47 @@ async def register(
             detail="Username already taken"
         )
     
+    # Заборона створення адміністраторів через публічну реєстрацію
+    if user.role == UserRole.ADMIN:
+        user.role = UserRole.USER
+    
     # Створення користувача
+    db_user = create_user(db=db, user=user)
+    
+    # Відправка email для верифікації в фоновому режимі
+    if db_user.verification_token:
+        background_tasks.add_task(
+            send_verification_email, 
+            db_user.email, 
+            db_user.verification_token
+        )
+    
+    return db_user
+
+@router.post("/register-admin", response_model=UserResponse, status_code=201)
+async def register_admin(
+    user: UserCreate, 
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db)
+):
+    """Реєстрація адміністратора (спеціальний endpoint)"""
+    # Перевірка чи користувач вже існує
+    if get_user_by_email(db, email=user.email):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Email already registered"
+        )
+    
+    if get_user_by_username(db, username=user.username):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Username already taken"
+        )
+    
+    # Примусово встановлюємо роль admin
+    user.role = UserRole.ADMIN
+    
+    # Створення користувача-адміністратора
     db_user = create_user(db=db, user=user)
     
     # Відправка email для верифікації в фоновому режимі
@@ -61,9 +102,11 @@ def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
+    # Додаємо роль користувача в токен
     access_token_expires = timedelta(minutes=settings.access_token_expire_minutes)
     access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.email, "role": user.role.value}, 
+        expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
