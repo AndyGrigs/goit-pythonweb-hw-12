@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from typing import Optional
+from typing import List, Optional
 from app.models.users import User
-from app.schemas.users import UserCreate, UserUpdate
+from app.schemas.users import UserCreate, UserRoleUpdate, UserUpdate
 from app.utils.auth import get_password_hash, verify_password, generate_verification_token
 
 def get_user_by_email(db: Session, email: str) -> Optional[User]:
@@ -16,6 +16,10 @@ def get_user_by_id(db: Session, user_id: int) -> Optional[User]:
     """Отримання користувача за ID"""
     return db.query(User).filter(User.id == user_id).first()
 
+def get_all_users(db: Session, skip: int = 0, limit: int = 100) -> List[User]:
+    """Отримання всіх користувачів (тільки для адмінів)"""
+    return db.query(User).offset(skip).limit(limit).all()
+
 def create_user(db: Session, user: UserCreate) -> User:
     """Створення нового користувача"""
     hashed_password = get_password_hash(user.password)
@@ -25,6 +29,7 @@ def create_user(db: Session, user: UserCreate) -> User:
         username=user.username,
         email=user.email,
         hashed_password=hashed_password,
+        role=user.role,
         verification_token=verification_token
     )
     db.add(db_user)
@@ -62,6 +67,17 @@ def update_user(db: Session, user_id: int, user_update: UserUpdate) -> Optional[
     for field, value in update_data.items():
         setattr(user, field, value)
     
+    db.commit()
+    db.refresh(user)
+    return user
+
+def update_user_role(db: Session, user_id: int, role_update: UserRoleUpdate) -> Optional[User]:
+    """Оновлення ролі користувача (тільки для адмінів)"""
+    user = get_user_by_id(db, user_id)
+    if not user:
+        return None
+    
+    user.role = role_update.role
     db.commit()
     db.refresh(user)
     return user
