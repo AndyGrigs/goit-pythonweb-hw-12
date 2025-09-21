@@ -10,9 +10,9 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from app.api.deps import get_db
 from app.utils.auth import verify_token
-from app.crud.users import get_user_by_email
 from app.models.users import User, UserRole
 from app.services.redis import redis_service
+from app.services.cache_utils import invalidate_user_cache
 import logging
 
 logger = logging.getLogger(__name__)

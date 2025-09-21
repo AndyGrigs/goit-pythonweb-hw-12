@@ -108,8 +108,3 @@ def require_role(required_role: UserRole):
             )
         return current_user
     return role_checker
-
-def invalidate_user_cache(user_email: str):
-    """Функція для інвалідації кешу користувача (для використання після оновлень)"""
-    redis_service.delete_user_cache(user_email)
-    logger.debug(f"Cache invalidated for user {user_email}")
