@@ -41,3 +41,16 @@ class EmailVerification(BaseModel):
 class UserRoleUpdate(BaseModel):
     """Окрема схема для зміни ролі користувача (тільки для адмінів)"""
     role: UserRole
+
+class PasswordResetRequest(BaseModel):
+    """Схема для запиту скидання пароля"""
+    email: EmailStr
+
+class PasswordResetConfirm(BaseModel):
+    """Схема для підтвердження скидання пароля"""
+    token: str = Field(..., min_length=1)
+    new_password: str = Field(..., min_length=6, max_length=255)
+
+class PasswordResetResponse(BaseModel):
+    """Схема відповіді для скидання пароля"""
+    message: str

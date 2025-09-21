@@ -3,6 +3,7 @@ from typing import List, Optional
 from app.models.users import User
 from app.schemas.users import UserCreate, UserRoleUpdate, UserUpdate
 from app.utils.auth import get_password_hash, verify_password, generate_verification_token
+from datetime import datetime, timedelta
 
 def get_user_by_email(db: Session, email: str) -> Optional[User]:
     """Отримання користувача за email"""
@@ -92,3 +93,48 @@ def update_user_avatar(db: Session, user_id: int, avatar_url: str) -> Optional[U
     db.commit()
     db.refresh(user)
     return user
+
+def create_password_reset_token(db: Session, email: str) -> Optional[User]:
+    """Створення токена для скидання пароля"""
+    from app.utils.auth import generate_reset_password_token
+    
+    user = get_user_by_email(db, email)
+    if not user:
+        return None
+    
+    # Генеруємо токен та встановлюємо час закінчення (1 година)
+    reset_token = generate_reset_password_token()
+    expires_at = datetime.now(datetime.timezone.utc()) + timedelta(hours=1)
+    
+    user.reset_password_token = reset_token
+    user.reset_password_expires = expires_at
+    
+    db.commit()
+    db.refresh(user)
+    return user
+
+def reset_user_password(db: Session, token: str, new_password: str) -> Optional[User]:
+    """Скидання пароля користувача за токеном"""
+    user = db.query(User).filter(
+        User.reset_password_token == token,
+        User.reset_password_expires > datetime.utcnow()
+    ).first()
+    
+    if not user:
+        return None
+    
+    # Оновлюємо пароль та очищаємо токен
+    user.hashed_password = get_password_hash(new_password)
+    user.reset_password_token = None
+    user.reset_password_expires = None
+    
+    db.commit()
+    db.refresh(user)
+    return user
+
+def verify_reset_token(db: Session, token: str) -> Optional[User]:
+    """Перевірка валідності токена скидання пароля"""
+    return db.query(User).filter(
+        User.reset_password_token == token,
+        User.reset_password_expires > datetime.utcnow()
+    ).first()

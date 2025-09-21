@@ -41,3 +41,32 @@ async def send_verification_email(email: str, token: str):
     
     fm = FastMail(conf)
     await fm.send_message(message)
+
+async def send_password_reset_email(email: str, token: str):
+    """Відправка email для скидання пароля"""
+    reset_url = f"http://localhost:8000/api/v1/auth/reset-password?token={token}"
+    
+    message = MessageSchema(
+        subject="Password Reset - Contact Management API",
+        recipients=[email],
+        body=f"""
+        <html>
+            <body>
+                <h2>Password Reset Request</h2>
+                <p>You have requested to reset your password for Contact Management API.</p>
+                <p>Click the link below to reset your password:</p>
+                <p><a href="{reset_url}" style="background-color: #f44336; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Reset Password</a></p>
+                <p>Or copy and paste this link in your browser:</p>
+                <p>{reset_url}</p>
+                <p><strong>Important:</strong> This link will expire in 1 hour for security reasons.</p>
+                <p>If you didn't request this password reset, please ignore this email.</p>
+                <br>
+                <p>Best regards,<br>Contact Management API Team</p>
+            </body>
+        </html>
+        """,
+        subtype="html"
+    )
+    
+    fm = FastMail(conf)
+    await fm.send_message(message)

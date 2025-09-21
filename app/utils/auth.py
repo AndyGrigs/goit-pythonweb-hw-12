@@ -40,3 +40,30 @@ def verify_token(token: str) -> Optional[str]:
 def generate_verification_token() -> str:
     """Генерація токена для верифікації email"""
     return secrets.token_urlsafe(32)
+
+def generate_reset_password_token() -> str:
+    """Генерація токена для скидання пароля"""
+    return secrets.token_urlsafe(32)
+
+def create_reset_password_token(email: str, expires_delta: Optional[timedelta] = None):
+    """Створення JWT токена для скидання пароля"""
+    to_encode = {"sub": email, "type": "password_reset"}
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(hours=1)  # Токен дійсний 1 годину
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
+    return encoded_jwt
+
+def verify_reset_password_token(token: str) -> Optional[str]:
+    """Верифікація токена скидання пароля"""
+    try:
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        email: str = payload.get("sub")
+        token_type: str = payload.get("type")
+        if email is None or token_type != "password_reset":
+            return None
+        return email
+    except JWTError:
+        return None

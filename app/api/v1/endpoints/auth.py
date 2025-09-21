@@ -15,6 +15,9 @@ from app.crud.users import (
 from app.utils.auth import create_access_token
 from app.services.email import send_verification_email
 from app.config import settings
+from app.schemas.users import PasswordResetRequest, PasswordResetConfirm, PasswordResetResponse
+from app.crud.users import create_password_reset_token, reset_user_password, verify_reset_token
+from app.services.email import send_password_reset_email
 
 router = APIRouter()
 
@@ -146,3 +149,59 @@ async def resend_verification_email(
         )
     
     return {"message": "If email exists, verification email has been sent"}
+
+@router.post("/forgot-password", response_model=PasswordResetResponse)
+async def forgot_password(
+    password_reset: PasswordResetRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db)
+):
+    """Запит скидання пароля"""
+    # Створюємо токен скидання пароля
+    user = create_password_reset_token(db, password_reset.email)
+    
+    # Відправляємо email навіть якщо користувач не знайдений (для безпеки)
+    if user and user.reset_password_token:
+        background_tasks.add_task(
+            send_password_reset_email,
+            user.email,
+            user.reset_password_token
+        )
+    
+    # Завжди повертаємо успішну відповідь (не розкриваємо чи email існує)
+    return PasswordResetResponse(
+        message="If the email exists, a password reset link has been sent"
+    )
+
+@router.post("/reset-password", response_model=PasswordResetResponse)
+def reset_password(
+    password_reset: PasswordResetConfirm,
+    db: Session = Depends(get_db)
+):
+    """Скидання пароля за токеном"""
+    # Скидаємо пароль
+    user = reset_user_password(db, password_reset.token, password_reset.new_password)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired reset token"
+        )
+    
+    return PasswordResetResponse(message="Password reset successfully")
+
+@router.get("/verify-reset-token")
+def verify_password_reset_token(
+    token: str,
+    db: Session = Depends(get_db)
+):
+    """Перевірка валідності токена скидання пароля"""
+    user = verify_reset_token(db, token)
+    
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired reset token"
+        )
+    
+    return {"message": "Token is valid", "email": user.email}
