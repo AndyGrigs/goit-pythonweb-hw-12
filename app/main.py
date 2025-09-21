@@ -9,6 +9,7 @@ from app.api.v1.api import api_router
 from app.database.base import Base
 from app.database.connection import engine
 from app.middleware.rate_limiter import limiter
+from app.services.redis import redis_service
 
 # Base.metadata.create_all(bind=engine)
 
@@ -49,6 +50,22 @@ def root():
             "users": "/api/v1/users", 
             "contacts": "/api/v1/contacts"
         }
+    }
+
+@app.get("/debug/cache/clear")
+def clear_cache():
+    """Очистка всього кешу (тільки для розробки)"""
+    if redis_service.clear_all_cache():
+        return {"message": "Cache cleared successfully"}
+    return {"message": "Failed to clear cache or Redis not available"}
+
+@app.get("/debug/cache/status")
+def cache_status():
+    """Статус Redis кешу"""
+    return {
+        "redis_connected": redis_service.is_connected(),
+        "redis_host": settings.redis_host,
+        "redis_port": settings.redis_port
     }
 
 @app.get("/health")
