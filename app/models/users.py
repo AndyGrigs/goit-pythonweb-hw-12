@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, Enum
 from sqlalchemy.orm import relationship
 from app.database.base import Base
 import enum
+from datetime import datetime
 
 class UserRole(str, enum.Enum):
     USER ="user"
@@ -15,6 +16,9 @@ class User(Base):
     username = Column(String(50), unique=True, nullable=False, index=True)
     email = Column(String(100), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
+    # Поля для скидання пароля
+    reset_password_token = Column(String(255), nullable=True)
+    reset_password_expires = Column(DateTime(timezone=True), nullable=True)
     avatar_url = Column(String(255), nullable=True)
     is_verified = Column(Boolean, default=False)
     role = Column(Enum(UserRole), nullable=True)
