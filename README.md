@@ -384,7 +384,7 @@ docker-compose -f docker-compose.prod.yaml up -d
 
 ---
 
-**Автор:** Ваше ім'я  
+**Автор:** AndyGrigs
 **Версія:** 2.0.0 (з JWT аутентифікацією)  
 **Tech Stack:** FastAPI, PostgreSQL, JWT, Cloudinary, Docker  
 **Python:** 3.11+  
