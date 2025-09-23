@@ -371,18 +371,6 @@ DB_PASSWORD=secure-production-password
 docker-compose -f docker-compose.prod.yaml up -d
 ```
 
-## 📋 TODO / Майбутні покращення
-
-- [ ] OAuth2 провайдери (Google, GitHub)
-- [ ] WebSocket підтримка для real-time
-- [ ] API versioning
-- [ ] Automated testing suite
-- [ ] Kubernetes deployment
-- [ ] Redis для сесій
-- [ ] Elasticsearch для пошуку
-- [ ] Webhook підтримка
-
----
 
 **Автор:** AndyGrigs
 **Версія:** 2.0.0 (з JWT аутентифікацією)  
