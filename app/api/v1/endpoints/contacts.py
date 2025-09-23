@@ -25,7 +25,7 @@ def create_contact_endpoint(
 ):
     """Створити новий контакт"""
     try:
-        return create_contact(db=db, contact=contact, ownwer_id=current_user.id)
+        return create_contact(db=db, contact=contact, owner_id=current_user.id)
     except Exception as e:
         if "unique constraint" in str(e).lower():
             raise HTTPException(status_code=400, detail="Email is already in the system")

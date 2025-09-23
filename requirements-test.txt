@@ -1,0 +1,16 @@
+# Тестові залежності
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+httpx==0.25.2
+faker==20.1.0
+factory-boy==3.3.0
+
+# Для мокування
+responses==0.24.1
+freezegun==1.2.2
+
+# Для тестової бази даних
+pytest-postgresql==5.0.0
+sqlalchemy-utils==0.41.1
