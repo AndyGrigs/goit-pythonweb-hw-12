@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="uk" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUD операції &mdash; Contact Management API 2.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a2355ae1" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a2355ae1" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f91dff7e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Індекс" href="../genindex.html" />
+    <link rel="search" title="Пошук" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Contact Management API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Код документація</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/models.html">Моделі бази даних</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/crud.html">CRUD операції</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/services.html">Сервіси</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Contact Management API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CRUD операції</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/models/crud.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="crud">
+<h1>CRUD операції<a class="headerlink" href="#crud" title="Link to this heading"></a></h1>
+<p>Цей розділ описує всі CRUD (Create, Read, Update, Delete) операції для роботи з користувачами та контактами в системі.</p>
+<section id="id1">
+<h2>Огляд CRUD модулів<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>CRUD операції організовані в два основні модулі:</p>
+<ul class="simple">
+<li><p><strong>users.py</strong> - операції з користувачами, аутентифікація, управління ролями</p></li>
+<li><p><strong>contacts.py</strong> - операції з контактами, пошук, фільтрація</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>CRUD користувачів<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>Функції аутентифікації<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+</section>
+<section id="id4">
+<h3>Основні CRUD операції<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+</section>
+<section id="id5">
+<h3>Управління паролями<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+</section>
+<section id="email">
+<h3>Верифікація email<a class="headerlink" href="#email" title="Link to this heading"></a></h3>
+</section>
+<section id="id6">
+<h3>Утиліти кешування<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p><strong>Приклади використання CRUD користувачів:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">app.crud.users</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_user</span><span class="p">,</span> <span class="n">authenticate_user</span><span class="p">,</span> <span class="n">get_user_by_email</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.schemas.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserCreate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.models.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserRole</span>
+
+<span class="c1"># Створення користувача</span>
+<span class="n">user_data</span> <span class="o">=</span> <span class="n">UserCreate</span><span class="p">(</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;newuser&quot;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;securepassword123&quot;</span><span class="p">,</span>
+    <span class="n">role</span><span class="o">=</span><span class="n">UserRole</span><span class="o">.</span><span class="n">USER</span>
+<span class="p">)</span>
+<span class="n">new_user</span> <span class="o">=</span> <span class="n">create_user</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">user_data</span><span class="p">)</span>
+
+<span class="c1"># Аутентифікація</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;securepassword123&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Аутентифікація успішна: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Пошук користувача</span>
+<span class="n">found_user</span> <span class="o">=</span> <span class="n">get_user_by_email</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2>CRUD контактів<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<section id="id8">
+<h3>Основні операції<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+</section>
+<section id="id9">
+<h3>Спеціальні функції<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><strong>Приклади використання CRUD контактів:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">app.crud.contacts</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_contact</span><span class="p">,</span> <span class="n">get_contacts</span><span class="p">,</span> <span class="n">get_contacts_with_upcoming_birthdays</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.schemas.contacts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContactCreate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+
+<span class="c1"># Створення контакту</span>
+<span class="n">contact_data</span> <span class="o">=</span> <span class="n">ContactCreate</span><span class="p">(</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="s2">&quot;Іван&quot;</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="s2">&quot;Петренко&quot;</span><span class="p">,</span>
+    <span class="n">email</span><span class="o">=</span><span class="s2">&quot;ivan@example.com&quot;</span><span class="p">,</span>
+    <span class="n">phone_number</span><span class="o">=</span><span class="s2">&quot;+380501234567&quot;</span><span class="p">,</span>
+    <span class="n">birth_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="n">additional_data</span><span class="o">=</span><span class="s2">&quot;Друг з університету&quot;</span>
+<span class="p">)</span>
+<span class="n">new_contact</span> <span class="o">=</span> <span class="n">create_contact</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">contact_data</span><span class="p">,</span> <span class="n">owner_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Отримання контактів з пошуком</span>
+<span class="n">contacts</span> <span class="o">=</span> <span class="n">get_contacts</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+    <span class="n">owner_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">skip</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">search</span><span class="o">=</span><span class="s2">&quot;Іван&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Дні народження на наступні 7 днів</span>
+<span class="n">upcoming_birthdays</span> <span class="o">=</span> <span class="n">get_contacts_with_upcoming_birthdays</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">owner_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2>Безпека та авторизація<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>Всі CRUD операції з контактами перевіряють права власності:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Правильно - користувач може отримати тільки свої контакти</span>
+<span class="n">user_contacts</span> <span class="o">=</span> <span class="n">get_contacts</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">owner_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="c1"># Правильно - користувач може оновити тільки свій контакт</span>
+<span class="n">updated_contact</span> <span class="o">=</span> <span class="n">update_contact</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+    <span class="n">contact_id</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
+    <span class="n">contact_update</span><span class="o">=</span><span class="n">update_data</span><span class="p">,</span>
+    <span class="n">owner_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span>  <span class="c1"># Обов&#39;язкова перевірка власності</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Middleware авторизації:</strong></p>
+<p>Система використовує middleware для автоматичної перевірки JWT токенів:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># У API ендпоінтах</span>
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/contacts/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_contacts</span><span class="p">(</span>
+    <span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_verified_user</span><span class="p">),</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)</span>
+<span class="p">):</span>
+    <span class="k">return</span> <span class="n">get_contacts</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">owner_id</span><span class="o">=</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h2>Кешування користувачів<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p>Система використовує Redis для кешування даних користувачів:</p>
+<p><strong>Процес кешування:</strong></p>
+<ol class="arabic simple">
+<li><p>Перевірка кешу при аутентифікації</p></li>
+<li><p>Завантаження з БД якщо немає в кеші</p></li>
+<li><p>Збереження в кеш після завантаження</p></li>
+<li><p>Інвалідація кешу при оновленнях</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Автоматичне кешування в get_current_user</span>
+<span class="n">cached_user_data</span> <span class="o">=</span> <span class="n">redis_service</span><span class="o">.</span><span class="n">get_user_cache</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">cached_user_data</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">user_dict_to_model</span><span class="p">(</span><span class="n">cached_user_data</span><span class="p">)</span>
+
+<span class="c1"># Завантаження з БД та кешування</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_email</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+<span class="n">redis_service</span><span class="o">.</span><span class="n">set_user_cache</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">user_model_to_dict</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h2>Обробка помилок<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<p>CRUD функції повертають <code class="docutils literal notranslate"><span class="pre">None</span></code> або <code class="docutils literal notranslate"><span class="pre">False</span></code> замість викидання винятків:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Перевірка результатів</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_id</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;User not found&quot;</span><span class="p">)</span>
+
+<span class="c1"># Безпечне видалення</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">delete_contact</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">contact_id</span><span class="p">,</span> <span class="n">owner_id</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Contact not found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h2>Оптимізація запитів<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p><strong>Індексація:</strong></p>
+<ul class="simple">
+<li><p>Всі поля пошуку мають індекси</p></li>
+<li><p>Foreign keys автоматично індексуються</p></li>
+<li><p>Composite індекси для частих запитів</p></li>
+</ul>
+<p><strong>Пагінація:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ефективна пагінація з OFFSET/LIMIT</span>
+<span class="n">contacts</span> <span class="o">=</span> <span class="n">get_contacts</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+    <span class="n">owner_id</span><span class="o">=</span><span class="n">user_id</span><span class="p">,</span>
+    <span class="n">skip</span><span class="o">=</span><span class="n">page</span> <span class="o">*</span> <span class="n">per_page</span><span class="p">,</span>    <span class="c1"># OFFSET</span>
+    <span class="n">limit</span><span class="o">=</span><span class="n">per_page</span>           <span class="c1"># LIMIT</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Пошук:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ефективний пошук з ILIKE та індексами</span>
+<span class="n">search_filter</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">Contact</span><span class="o">.</span><span class="n">first_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">search</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">),</span>
+    <span class="n">Contact</span><span class="o">.</span><span class="n">last_name</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">search</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">),</span>
+    <span class="n">Contact</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">ilike</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">search</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h2>Транзакції<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<p>CRUD операції використовують транзакції SQLAlchemy:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_contact</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">contact</span><span class="p">:</span> <span class="n">ContactCreate</span><span class="p">,</span> <span class="n">owner_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">db_contact</span> <span class="o">=</span> <span class="n">Contact</span><span class="p">(</span><span class="o">**</span><span class="n">contact</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="n">owner_id</span><span class="o">=</span><span class="n">owner_id</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_contact</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>           <span class="c1"># Автоматичний rollback при помилці</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_contact</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_contact</span>
+</pre></div>
+</div>
+<p><strong>Для складних операцій:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Множинні операції в одній транзакції</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">contact</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">IntegrityError</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Data conflict&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h2>Валідація даних<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p>CRUD функції працюють з Pydantic схемами для валідації:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">app.schemas.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserCreate</span><span class="p">,</span> <span class="n">UserUpdate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.schemas.contacts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContactCreate</span><span class="p">,</span> <span class="n">ContactUpdate</span>
+
+<span class="c1"># Автоматична валідація через Pydantic</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="c1"># user вже провалідований Pydantic</span>
+    <span class="n">hashed_password</span> <span class="o">=</span> <span class="n">get_password_hash</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+
+<span class="c1"># Часткове оновлення з exclude_unset</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_contact</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span><span class="p">,</span> <span class="n">contact_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">contact_update</span><span class="p">:</span> <span class="n">ContactUpdate</span><span class="p">):</span>
+    <span class="n">update_data</span> <span class="o">=</span> <span class="n">contact_update</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">exclude_unset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Оновлюємо тільки надані поля</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Contact Management Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
