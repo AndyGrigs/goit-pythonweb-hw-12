@@ -1,3 +1,27 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Виправлений скрипт для автоматичного налаштування Sphinx документації
+для Contact Management API проекту.
+
+Використання:
+    python setup_docs.py [--clean] [--build] [--serve]
+
+Опції:
+    --clean     Очистити існуючу документацію
+    --build     Побудувати документацію після налаштування
+    --serve     Запустити сервер для перегляду документації
+"""
+
+import os
+import sys
+import shutil
+import subprocess
+import argparse
+from pathlib import Path
+import textwrap
+
+
 def build_documentation():
     """Будує документацію."""
     print("🏗️ Побудова документації...")
@@ -215,7 +239,7 @@ def main():
     
     args = parser.parse_args()
     
-    print("📚 Contact Management API - Налаштування документації")
+    print("Contact Management API - Налаштування документації")
     print("=" * 60)
     
     try:
@@ -276,33 +300,6 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Виправлений скрипт для автоматичного налаштування Sphinx документації
-для Contact Management API проекту.
-
-Використання:
-    python setup_docs.py [--clean] [--build] [--serve]
-
-Опції:
-    --clean     Очистити існуючу документацію
-    --build     Побудувати документацію після налаштування
-    --serve     Запустити сервер для перегляду документації
-"""
-
-import os
-import sys
-import shutil
-import subprocess
-import argparse
-from pathlib import Path
-import textwrap
-
-
-if __name__ == "__main__":
-    main()
 
 def run_command(command, description="", check=True):
     """Запускає команду та виводить результат."""
@@ -2042,3 +2039,7 @@ def add_missing_docstrings():
     
     print(example_docstring)
     print("✅ Інструкції для docstring створені")
+
+
+if __name__ == "__main__":
+    main()

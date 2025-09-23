@@ -1,0 +1,694 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="uk" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сервіси &mdash; Contact Management API 2.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5ee4f644" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5ee4f644" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f91dff7e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Індекс" href="../genindex.html" />
+    <link rel="search" title="Пошук" href="../search.html" />
+    <link rel="next" title="Утиліти" href="utils.html" />
+    <link rel="prev" title="CRUD операції" href="crud.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Contact Management API
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">🚀 API Документація</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Документація</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html">Аутентифікація API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#id1">Реєстрація користувача</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#id2">Реєстрація адміністратора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#id3">Вхід користувача</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#email">Верифікація Email</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#id4">Повторна відправка верифікації</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/authentication.html#id5">Скидання пароля</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/users.html">Користувачі API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/users.html#id1">Отримання поточного користувача</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/users.html#id2">Завантаження аватара</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/users.html#id3">Зміна ролі користувача</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html">Контакти API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id1">Створення контакту</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id2">Отримання списку контактів</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id">Отримання контакту за ID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id3">Оновлення контакту</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id4">Видалення контакту</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/contacts.html#id5">Дні народження</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/index.html#id1">Загальна інформація</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#base-url">Base URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#id2">Версіонування API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#id3">Аутентифікація</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#id4">Формат відповідей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#id5">Обробка помилок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/authentication.html">Аутентифікація API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#id1">Реєстрація користувача</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#id2">Реєстрація адміністратора</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#id3">Вхід користувача</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#email">Верифікація Email</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#id4">Повторна відправка верифікації</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/authentication.html#id5">Скидання пароля</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/users.html">Користувачі API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/users.html#id1">Отримання поточного користувача</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/users.html#id2">Завантаження аватара</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/users.html#id3">Зміна ролі користувача</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/contacts.html">Контакти API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id1">Створення контакту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id2">Отримання списку контактів</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id">Отримання контакту за ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id3">Оновлення контакту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id4">Видалення контакту</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/contacts.html#id5">Дні народження</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 Код Документація</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Документація модулів</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models.html">Моделі бази даних</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.UserRole"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.UserRole.USER"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.UserRole.ADMIN"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id0"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id2"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.hashed_password"><code class="docutils literal notranslate"><span class="pre">User.hashed_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.reset_password_token"><code class="docutils literal notranslate"><span class="pre">User.reset_password_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.reset_password_expires"><code class="docutils literal notranslate"><span class="pre">User.reset_password_expires</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.avatar_url"><code class="docutils literal notranslate"><span class="pre">User.avatar_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.is_verified"><code class="docutils literal notranslate"><span class="pre">User.is_verified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.role"><code class="docutils literal notranslate"><span class="pre">User.role</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.verification_token"><code class="docutils literal notranslate"><span class="pre">User.verification_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.created_at"><code class="docutils literal notranslate"><span class="pre">User.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.updated_at"><code class="docutils literal notranslate"><span class="pre">User.updated_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.contacts"><code class="docutils literal notranslate"><span class="pre">User.contacts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id3"><code class="docutils literal notranslate"><span class="pre">User.contacts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.is_admin"><code class="docutils literal notranslate"><span class="pre">User.is_admin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.__repr__"><code class="docutils literal notranslate"><span class="pre">User.__repr__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#app.models.users.User.to_dict"><code class="docutils literal notranslate"><span class="pre">User.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#enums">Перечислення (Enums)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id4"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id9">Основні моделі</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id10">Модель користувача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id29">Модель контакту</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="crud.html">CRUD операції</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#module-app.crud.users">Користувачі CRUD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.user_dict_to_model"><code class="docutils literal notranslate"><span class="pre">user_dict_to_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.user_model_to_dict"><code class="docutils literal notranslate"><span class="pre">user_model_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_current_verified_user"><code class="docutils literal notranslate"><span class="pre">get_current_verified_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_current_admin_user"><code class="docutils literal notranslate"><span class="pre">get_current_admin_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.require_role"><code class="docutils literal notranslate"><span class="pre">require_role()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.invalidate_user_cache"><code class="docutils literal notranslate"><span class="pre">invalidate_user_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">get_user_by_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">get_user_by_username()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.get_all_users"><code class="docutils literal notranslate"><span class="pre">get_all_users()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.authenticate_user"><code class="docutils literal notranslate"><span class="pre">authenticate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.verify_user_email"><code class="docutils literal notranslate"><span class="pre">verify_user_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.update_user"><code class="docutils literal notranslate"><span class="pre">update_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.update_user_role"><code class="docutils literal notranslate"><span class="pre">update_user_role()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.update_user_avatar"><code class="docutils literal notranslate"><span class="pre">update_user_avatar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.create_password_reset_token"><code class="docutils literal notranslate"><span class="pre">create_password_reset_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.reset_user_password"><code class="docutils literal notranslate"><span class="pre">reset_user_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#app.crud.users.verify_reset_token"><code class="docutils literal notranslate"><span class="pre">verify_reset_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#id2">Контакти CRUD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#id3">Основні функції</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id4">Управління користувачами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id8">Управління контактами</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Сервіси</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.services.email">Email сервіс</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.email.send_verification_email"><code class="docutils literal notranslate"><span class="pre">send_verification_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.email.send_password_reset_email"><code class="docutils literal notranslate"><span class="pre">send_password_reset_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.services.redis">Redis кешування</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService"><code class="docutils literal notranslate"><span class="pre">RedisService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.services.cloudinary">Cloudinary сервіс</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.cloudinary.upload_avatar"><code class="docutils literal notranslate"><span class="pre">upload_avatar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.cloudinary.delete_avatar"><code class="docutils literal notranslate"><span class="pre">delete_avatar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-app.services.cache_utils">Cache утиліти</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.cache_utils.invalidate_user_cache"><code class="docutils literal notranslate"><span class="pre">invalidate_user_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Основні класи та функції</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#redisservice">RedisService</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Функції Cloudinary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Email функції</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Утиліти</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#module-app.utils.auth">Аутентифікація утиліти</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.verify_password"><code class="docutils literal notranslate"><span class="pre">verify_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.get_password_hash"><code class="docutils literal notranslate"><span class="pre">get_password_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.create_access_token"><code class="docutils literal notranslate"><span class="pre">create_access_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.verify_token"><code class="docutils literal notranslate"><span class="pre">verify_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.generate_verification_token"><code class="docutils literal notranslate"><span class="pre">generate_verification_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.generate_reset_password_token"><code class="docutils literal notranslate"><span class="pre">generate_reset_password_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.create_reset_password_token"><code class="docutils literal notranslate"><span class="pre">create_reset_password_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#app.utils.auth.verify_reset_password_token"><code class="docutils literal notranslate"><span class="pre">verify_reset_password_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#id3">Основні функції</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id4">Робота з паролями</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#jwt">JWT токени</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id8">Токени верифікації</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#id2">Структура проекту</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Моделі бази даних</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models.html#app.models.users.UserRole"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.UserRole.USER"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.UserRole.ADMIN"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id0"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id2"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#app.models.users.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.hashed_password"><code class="docutils literal notranslate"><span class="pre">User.hashed_password</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.reset_password_token"><code class="docutils literal notranslate"><span class="pre">User.reset_password_token</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.reset_password_expires"><code class="docutils literal notranslate"><span class="pre">User.reset_password_expires</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.avatar_url"><code class="docutils literal notranslate"><span class="pre">User.avatar_url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.is_verified"><code class="docutils literal notranslate"><span class="pre">User.is_verified</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.role"><code class="docutils literal notranslate"><span class="pre">User.role</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.verification_token"><code class="docutils literal notranslate"><span class="pre">User.verification_token</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.created_at"><code class="docutils literal notranslate"><span class="pre">User.created_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.updated_at"><code class="docutils literal notranslate"><span class="pre">User.updated_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.contacts"><code class="docutils literal notranslate"><span class="pre">User.contacts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id3"><code class="docutils literal notranslate"><span class="pre">User.contacts</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.is_admin"><code class="docutils literal notranslate"><span class="pre">User.is_admin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.__repr__"><code class="docutils literal notranslate"><span class="pre">User.__repr__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#app.models.users.User.to_dict"><code class="docutils literal notranslate"><span class="pre">User.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#enums">Перечислення (Enums)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id4"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id5"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id6"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id7"><code class="docutils literal notranslate"><span class="pre">UserRole.USER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id8"><code class="docutils literal notranslate"><span class="pre">UserRole.ADMIN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id9">Основні моделі</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id10">Модель користувача</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="models.html#id11"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="models.html#id29">Модель контакту</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crud.html">CRUD операції</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crud.html#module-app.crud.users">Користувачі CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.user_dict_to_model"><code class="docutils literal notranslate"><span class="pre">user_dict_to_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.user_model_to_dict"><code class="docutils literal notranslate"><span class="pre">user_model_to_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_current_verified_user"><code class="docutils literal notranslate"><span class="pre">get_current_verified_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_current_admin_user"><code class="docutils literal notranslate"><span class="pre">get_current_admin_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.require_role"><code class="docutils literal notranslate"><span class="pre">require_role()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.invalidate_user_cache"><code class="docutils literal notranslate"><span class="pre">invalidate_user_cache()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">get_user_by_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_username"><code class="docutils literal notranslate"><span class="pre">get_user_by_username()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_user_by_id"><code class="docutils literal notranslate"><span class="pre">get_user_by_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.get_all_users"><code class="docutils literal notranslate"><span class="pre">get_all_users()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.create_user"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.authenticate_user"><code class="docutils literal notranslate"><span class="pre">authenticate_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.verify_user_email"><code class="docutils literal notranslate"><span class="pre">verify_user_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.update_user"><code class="docutils literal notranslate"><span class="pre">update_user()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.update_user_role"><code class="docutils literal notranslate"><span class="pre">update_user_role()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.update_user_avatar"><code class="docutils literal notranslate"><span class="pre">update_user_avatar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.create_password_reset_token"><code class="docutils literal notranslate"><span class="pre">create_password_reset_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.reset_user_password"><code class="docutils literal notranslate"><span class="pre">reset_user_password()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#app.crud.users.verify_reset_token"><code class="docutils literal notranslate"><span class="pre">verify_reset_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="crud.html#id2">Контакти CRUD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crud.html#id3">Основні функції</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#id4">Управління користувачами</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id0"><code class="docutils literal notranslate"><span class="pre">get_user_by_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id5"><code class="docutils literal notranslate"><span class="pre">create_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id6"><code class="docutils literal notranslate"><span class="pre">authenticate_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="crud.html#id7"><code class="docutils literal notranslate"><span class="pre">verify_user_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="crud.html#id8">Управління контактами</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Сервіси</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.services.email">Email сервіс</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.email.send_verification_email"><code class="docutils literal notranslate"><span class="pre">send_verification_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.email.send_password_reset_email"><code class="docutils literal notranslate"><span class="pre">send_password_reset_email()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.services.redis">Redis кешування</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.redis.RedisService"><code class="docutils literal notranslate"><span class="pre">RedisService</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.__init__"><code class="docutils literal notranslate"><span class="pre">RedisService.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.is_connected"><code class="docutils literal notranslate"><span class="pre">RedisService.is_connected()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.set_user_cache"><code class="docutils literal notranslate"><span class="pre">RedisService.set_user_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.get_user_cache"><code class="docutils literal notranslate"><span class="pre">RedisService.get_user_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.delete_user_cache"><code class="docutils literal notranslate"><span class="pre">RedisService.delete_user_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#app.services.redis.RedisService.clear_all_cache"><code class="docutils literal notranslate"><span class="pre">RedisService.clear_all_cache()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.services.cloudinary">Cloudinary сервіс</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.cloudinary.upload_avatar"><code class="docutils literal notranslate"><span class="pre">upload_avatar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.cloudinary.delete_avatar"><code class="docutils literal notranslate"><span class="pre">delete_avatar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.services.cache_utils">Cache утиліти</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.cache_utils.invalidate_user_cache"><code class="docutils literal notranslate"><span class="pre">invalidate_user_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Основні класи та функції</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#redisservice">RedisService</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">RedisService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Функції Cloudinary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">upload_avatar()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">delete_avatar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Email функції</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">send_verification_email()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">send_password_reset_email()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Утиліти</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-app.utils.auth">Аутентифікація утиліти</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.verify_password"><code class="docutils literal notranslate"><span class="pre">verify_password()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.get_password_hash"><code class="docutils literal notranslate"><span class="pre">get_password_hash()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.create_access_token"><code class="docutils literal notranslate"><span class="pre">create_access_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.verify_token"><code class="docutils literal notranslate"><span class="pre">verify_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.generate_verification_token"><code class="docutils literal notranslate"><span class="pre">generate_verification_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.generate_reset_password_token"><code class="docutils literal notranslate"><span class="pre">generate_reset_password_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.create_reset_password_token"><code class="docutils literal notranslate"><span class="pre">create_reset_password_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#app.utils.auth.verify_reset_password_token"><code class="docutils literal notranslate"><span class="pre">verify_reset_password_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#id3">Основні функції</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#id4">Робота з паролями</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id0"><code class="docutils literal notranslate"><span class="pre">get_password_hash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id5"><code class="docutils literal notranslate"><span class="pre">verify_password()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#jwt">JWT токени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id6"><code class="docutils literal notranslate"><span class="pre">create_access_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id7"><code class="docutils literal notranslate"><span class="pre">verify_token()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#id8">Токени верифікації</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id9"><code class="docutils literal notranslate"><span class="pre">generate_verification_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id10"><code class="docutils literal notranslate"><span class="pre">generate_reset_password_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id11"><code class="docutils literal notranslate"><span class="pre">create_reset_password_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#id12"><code class="docutils literal notranslate"><span class="pre">verify_reset_password_token()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🛠️ Розробка</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Документація для розробників</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html">Налаштування середовища розробки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id2">Попередні вимоги</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id3">Крок 1: Клонування репозиторію</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id4">Крок 2: Створення віртуального середовища</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id5">Крок 3: Встановлення залежностей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id6">Крок 4: Налаштування змінних середовища</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id7">Крок 5: Запуск сервісів</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id8">Крок 6: Виконання міграцій</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id9">Крок 7: Запуск сервера розробки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#id10">Корисні команди</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#ide">Налаштування IDE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../development/setup.html#vs-code">VS Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../development/setup.html#pycharm">PyCharm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development/testing.html">Тестування</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development/testing.html#id2">Швидкий старт</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/testing.html#id3">Структура тестів</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/testing.html#id4">Покриття тестами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/testing.html#id5">Написання тестів</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html">Деплой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development/deployment.html#docker">Docker деплой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/deployment.html#id2">Змінні середовища для продакшн</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/deployment.html#nginx">Nginx конфігурація</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/deployment.html#id3">Моніторинг</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/deployment.html#ssl-tls">SSL/TLS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../development/index.html#id2">Загальна інформація</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/index.html#id3">Вимоги до середовища розробки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/index.html#id4">Рекомендована структура розробки</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/setup.html">Налаштування середовища розробки</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id2">Попередні вимоги</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id3">Крок 1: Клонування репозиторію</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id4">Крок 2: Створення віртуального середовища</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id5">Крок 3: Встановлення залежностей</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id6">Крок 4: Налаштування змінних середовища</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id7">Крок 5: Запуск сервісів</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id8">Крок 6: Виконання міграцій</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id9">Крок 7: Запуск сервера розробки</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#id10">Корисні команди</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/setup.html#ide">Налаштування IDE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#vs-code">VS Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../development/setup.html#pycharm">PyCharm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/testing.html">Тестування</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/testing.html#id2">Швидкий старт</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/testing.html#id3">Структура тестів</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/testing.html#id4">Покриття тестами</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/testing.html#id5">Написання тестів</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/deployment.html">Деплой</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html#docker">Docker деплой</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html#id2">Змінні середовища для продакшн</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html#nginx">Nginx конфігурація</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html#id3">Моніторинг</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development/deployment.html#ssl-tls">SSL/TLS</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Contact Management API</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Документація модулів</a></li>
+      <li class="breadcrumb-item active">Сервіси</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/yourusername/contact-management-api/blob/main/docs/modules/services.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Сервіси<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>Модулі для роботи з зовнішніми сервісами та бізнес-логікою.</p>
+<section id="module-app.services.email">
+<span id="email"></span><h2>Email сервіс<a class="headerlink" href="#module-app.services.email" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.services.email.send_verification_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.email.</span></span><span class="sig-name descname"><span class="pre">send_verification_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/email.html#send_verification_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.email.send_verification_email" title="Link to this definition"></a></dt>
+<dd><p>Відправка email для верифікації</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.services.email.send_password_reset_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.email.</span></span><span class="sig-name descname"><span class="pre">send_password_reset_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/email.html#send_password_reset_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.email.send_password_reset_email" title="Link to this definition"></a></dt>
+<dd><p>Відправка email для скидання пароля</p>
+</dd></dl>
+
+</section>
+<section id="module-app.services.redis">
+<span id="redis"></span><h2>Redis кешування<a class="headerlink" href="#module-app.services.redis" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.services.redis.RedisService">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.redis.</span></span><span class="sig-name descname"><span class="pre">RedisService</span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.is_connected">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.is_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.is_connected" title="Link to this definition"></a></dt>
+<dd><p>Перевірка чи підключений Redis</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.set_user_cache">
+<span class="sig-name descname"><span class="pre">set_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.set_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.set_user_cache" title="Link to this definition"></a></dt>
+<dd><p>Кешування даних користувача</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.get_user_cache">
+<span class="sig-name descname"><span class="pre">get_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.get_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.get_user_cache" title="Link to this definition"></a></dt>
+<dd><p>Отримання користувача з кешу</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.delete_user_cache">
+<span class="sig-name descname"><span class="pre">delete_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.delete_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.delete_user_cache" title="Link to this definition"></a></dt>
+<dd><p>Видалення користувача з кешу</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.services.redis.RedisService.clear_all_cache">
+<span class="sig-name descname"><span class="pre">clear_all_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.clear_all_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.redis.RedisService.clear_all_cache" title="Link to this definition"></a></dt>
+<dd><p>Очистка всього кешу (для розробки)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-app.services.cloudinary">
+<span id="cloudinary"></span><h2>Cloudinary сервіс<a class="headerlink" href="#module-app.services.cloudinary" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.services.cloudinary.upload_avatar">
+<span class="sig-prename descclassname"><span class="pre">app.services.cloudinary.</span></span><span class="sig-name descname"><span class="pre">upload_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/app/services/cloudinary.html#upload_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.cloudinary.upload_avatar" title="Link to this definition"></a></dt>
+<dd><p>Завантаження аватара в Cloudinary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.services.cloudinary.delete_avatar">
+<span class="sig-prename descclassname"><span class="pre">app.services.cloudinary.</span></span><span class="sig-name descname"><span class="pre">delete_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/cloudinary.html#delete_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.cloudinary.delete_avatar" title="Link to this definition"></a></dt>
+<dd><p>Видалення аватара з Cloudinary</p>
+</dd></dl>
+
+</section>
+<section id="module-app.services.cache_utils">
+<span id="cache"></span><h2>Cache утиліти<a class="headerlink" href="#module-app.services.cache_utils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.services.cache_utils.invalidate_user_cache">
+<span class="sig-prename descclassname"><span class="pre">app.services.cache_utils.</span></span><span class="sig-name descname"><span class="pre">invalidate_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/cache_utils.html#invalidate_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.services.cache_utils.invalidate_user_cache" title="Link to this definition"></a></dt>
+<dd><p>Функція для інвалідації кешу користувача</p>
+</dd></dl>
+
+</section>
+<section id="id2">
+<h2>Основні класи та функції<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="redisservice">
+<h3>RedisService<a class="headerlink" href="#redisservice" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.redis.</span></span><span class="sig-name descname"><span class="pre">RedisService</span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.is_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Перевірка чи підключений Redis</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">set_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.set_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Кешування даних користувача</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">get_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.get_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Отримання користувача з кешу</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">delete_user_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.delete_user_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Видалення користувача з кешу</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">clear_all_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/app/services/redis.html#RedisService.clear_all_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Очистка всього кешу (для розробки)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id9">
+<h3>Функції Cloudinary<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-prename descclassname"><span class="pre">app.services.cloudinary.</span></span><span class="sig-name descname"><span class="pre">upload_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/app/services/cloudinary.html#upload_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd><p>Завантаження аватара в Cloudinary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-prename descclassname"><span class="pre">app.services.cloudinary.</span></span><span class="sig-name descname"><span class="pre">delete_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">public_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/cloudinary.html#delete_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Видалення аватара з Cloudinary</p>
+</dd></dl>
+
+</section>
+<section id="id12">
+<h3>Email функції<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="id13">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.email.</span></span><span class="sig-name descname"><span class="pre">send_verification_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/email.html#send_verification_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd><p>Відправка email для верифікації</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id14">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.email.</span></span><span class="sig-name descname"><span class="pre">send_password_reset_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/app/services/email.html#send_password_reset_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Відправка email для скидання пароля</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="crud.html" class="btn btn-neutral float-left" title="CRUD операції" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Утиліти" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Contact Management Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
