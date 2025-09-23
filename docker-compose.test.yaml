@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  test-db:
+    image: postgres:15
+    container_name: contacts_test_db
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: test_contacts_db
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5434:5432"
+    volumes:
+      - test_postgres_data:/var/lib/postgresql/data
+      - ./tests/test_init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - test_contacts_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d test_contacts_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  test-redis:
+    image: redis:7-alpine
+    container_name: contacts_test_redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - test_redis_data:/data
+    networks:
+      - test_contacts_network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Контейнер для запуску тестів
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: contacts_test_runner
+    depends_on:
+      test-db:
+        condition: service_healthy
+      test-redis:
+        condition: service_healthy
+    environment:
+      - TESTING=true
+      - DB_HOST=test-db
+      - DB_PORT=5432
+      - DB_NAME=test_contacts_db
+      - DB_USER=test_user
+      - DB_PASSWORD=test_password
+      - REDIS_HOST=test-redis
+      - REDIS_PORT=6379
+      - SECRET_KEY=test-secret-key-for-testing
+      - MAIL_USERNAME=test@example.com
+      - MAIL_PASSWORD=test_password
+      - CLOUDINARY_NAME=test_cloud
+      - CLOUDINARY_API_KEY=test_key
+      - CLOUDINARY_API_SECRET=test_secret
+    volumes:
+      - .:/app
+      - test_coverage:/app/htmlcov
+    networks:
+      - test_contacts_network
+    working_dir: /app
+    command: >
+      sh -c "
+        echo 'Очікування готовності сервісів...' &&
+        sleep 10 &&
+        echo 'Запуск тестів...' &&
+        python -m pytest tests/ 
+          --cov=app 
+          --cov-report=term-missing 
+          --cov-report=html:htmlcov 
+          --cov-fail-under=75 
+          -v 
+          --color=yes
+      "
+
+volumes:
+  test_postgres_data:
+  test_redis_data:
+  test_coverage:
+
+networks:
+  test_contacts_network:
+    driver: bridge
