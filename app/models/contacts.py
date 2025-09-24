@@ -5,6 +5,7 @@
 включаючи особисту інформацію та зв'язки з власниками.
 """
 
+from typing import Optional
 from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.base import Base
